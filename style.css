@@ -1,0 +1,134 @@
+@charset 'utf-8';
+
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.25;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f7f9f4;
+    font-family: "Syne Mono", monospace;
+    background-color: #d6dfc1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url(./imgs/bg.png) 50% 50%/cover no-repeat;
+}
+
+#wrapper {
+    /* width: 900px; */
+    height: auto;
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#title {
+    margin-bottom: 40px;
+}
+
+#score {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+#player,
+#computer {
+    flex-grow: 1;
+    border-radius: 8px;
+    padding: 10px 15px;
+    max-height: 380px;
+}
+
+#player header,
+#computer header {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #0a0f0f;
+    text-shadow: 0 0 1.5px #0a0f0f36;
+
+}
+
+#player-name,
+#computer h2 {
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+#player-points,
+#computer-points {
+    font-size: 40px;
+}
+
+#player {
+    background-color: #6851516e;
+    border: solid 1px #685151a1;
+    backdrop-filter: blur(2px) brightness(1.8);
+    box-shadow: inset 1px 1px 5px #68515187, inset -1px -1px 5px #68515187;
+}
+
+#computer {
+    background-color: #8295aa40;
+    border: solid 1px #8295aaa1;
+    backdrop-filter: blur(2px) brightness(1.8);
+    box-shadow: inset 1px 1px 5px #8295aa87, inset -1px -1px 5px #8295aa87;
+}
+
+#player-choice,
+#computer-choice {
+    list-style: none;
+}
+
+#player-choice a,
+#computer-choice a {
+    opacity: 0.375;
+    transition: opacity .2s ease-in-out;
+}
+
+#player-choice a:hover, .selecionado {
+    opacity: 1 !important;
+    cursor: pointer;
+}
+
+#player-choice li,
+#computer-choice li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#player-choice li img,
+#computer-choice li img {
+    max-width: 50px;
+}
+
+#versus {
+    font-size: 48px;
+    font-family: "Shadows Into Light", monospace;
+}
+
+#msg {
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 40px;
+    background-color: #0a0f0f5c;
+    border: solid 1px #0a0f0fa1;
+    backdrop-filter: blur(2px) brightness(1.8);
+    box-shadow: inset 1px 1px 5px #0a0f0f87, inset -1px -1px 5px #0a0f0f87;
+}

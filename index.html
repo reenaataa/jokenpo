@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imgs/fav.ico" type="image/x-icon">
+    <title>Jokenpô!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1 id="title">Pedra, Papel, Tesoura<i>!</i></h1>
+
+        <div id="score">
+            <div id="player">
+                <header>
+                    <h2 id="player-name"></h2>
+                    <span id="player-points">0</span>
+                </header>
+                <ul id="player-choice">
+                    <li><a id="player-choice-1" onclick="jogar(1)"><img src="./imgs/rock.png" alt="Pedra" /></a></li>
+                    <li><a id="player-choice-2" onclick="jogar(2)"><img src="./imgs/paper.png" alt="Papel" /></a></li>
+                    <li><a id="player-choice-3" onclick="jogar(3)"><img src="./imgs/scissor.png" alt="Tesoura" /></a></li>
+                </ul>
+            </div>
+
+            <h2 id="versus">VS</h2>
+
+            <div id="computer">
+                <header>
+                    <span id="computer-points">0</span>
+                    <h2>Ele</h2>
+                </header>
+                <ul id="computer-choice">
+                    <li><a id="computer-choice-3"><img src="./imgs/scissor.png" alt="Tesoura" /></a></li>
+                    <li><a id="computer-choice-2"><img src="./imgs/paper.png" alt=" Papel" /></a></li>
+                    <li><a id="computer-choice-1"><img src="./imgs/rock.png" alt="Pedra" /></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="msg"></div>
+    </div>
+</body>
+
+</html>
