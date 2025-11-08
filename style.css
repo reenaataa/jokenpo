@@ -138,3 +138,38 @@ body {
     backdrop-filter: blur(2px) brightness(1.8);
     box-shadow: inset 1px 1px 5px #0a0f0f87, inset -1px -1px 5px #0a0f0f87;
 }
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+    color: var(--text-color);
+    overflow: hidden;
+    gap: 8px;
+}
+
+footer a svg {
+    width: 32px;
+    height: 32px;
+    fill: #d6dfc1;
+}
+
+footer a span {
+    display: inline-block;
+    transform: translateX(10px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    color: #d6dfc1;
+}
+
+footer a:hover span {
+    transform: translateX(0);
+    opacity: 1;
+}
