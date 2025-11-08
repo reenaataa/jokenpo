@@ -18,6 +18,11 @@ body {
     color: #f7f9f4;
     font-family: "Syne Mono", monospace;
     background-color: #d6dfc1;
+}
+
+#interface {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,7 +107,8 @@ body {
     transition: opacity .2s ease-in-out;
 }
 
-#player-choice a:hover, .selecionado {
+#player-choice a:hover,
+.selecionado {
     opacity: 1 !important;
     cursor: pointer;
 }
