@@ -1,11 +1,27 @@
-var jogadorNome = prompt('Qual é o seu nome?');
+let jogadorNome = prompt('Qual é o seu nome?');
 const campoNome = document.getElementById('player-name');
-var pontuacaoJogador = document.getElementById('player-points');
-var pontuacaoComputador = document.getElementById('computer-points');
-var jogadaComputador = 0;
-var escolhaJogador = 0;
-var jogadorPontos = 0;
-var computadorPontos = 0;
+const pontuacaoJogador = document.getElementById('player-points');
+const pontuacaoComputador = document.getElementById('computer-points');
+const campoMsg = document.getElementById('msg');
+
+let jogadaComputador = 0;
+let escolhaJogador = 0;
+let jogadorPontos = 0;
+let computadorPontos = 0;
+let bloqueado = false;
+
+const msgPadrao = 'Escolha uma opção...';
+const mensagens = {
+    jogador: [
+        'Aí sim!', 'Boa jogada!', 'Continue assim!', 'É isso aí!', 'Você mandou bem!', 'Essa foi certeira!', 'Jogada de mestre!', 'Imbatível!', 'Você está com sorte!', 'Que reflexo!', 'Ele odeia perder, mas você não liga!', 'Essa foi épica!', 'Eba! Você ganhou!', 'Ele deixou você ganhar... dessa vez.', 'ninguém vence para sempreParabénS!'
+    ],
+    computador: [
+        'Ele venceu!', 'Não foi dessa vez!', 'Tente novamente!', 'Ele mandou bem!', 'Derrota amarga!', 'Ele foi mais rápido!', 'Ele está afiado!', 'HA! Ele aprende com seus erros...', 'Você caiu na armadilha!', 'Essa doeu!', 'Ele levou essa!', 'Ele está te estudando...', 'Ele já sabia que você ia jogar isso.', 'HA! Tá ficando previsível!'
+    ],
+    empate: [
+        'Empate!', 'Vocês pensaram igual... legal, né? :)', 'Ninguém venceu dessa vez!', 'Foi por pouco!', 'Empate técnico!', 'Sincronia total! É como se ele estivesse dentro da sua mente!', 'Que coincidência!', 'Empate inesperado!', 'Nada feito!', 'Equilíbrio perfeito!', 'Empate... mas só dessa vez!', 'Vocês pensaram igual. De novo.', 'HA! Tá ficando previsível!'
+    ]
+};
 
 if (!jogadorNome) {
     campoNome.innerText = 'Coisinha';
@@ -17,12 +33,17 @@ if (!jogadorNome) {
 
 // muda texto
 function mensagem(texto) {
-    document.getElementById('msg').innerHTML = texto;
+    campoMsg.innerHTML = texto;
 }
 
 // sorteia entre dois números
 function sorteador(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// sorteia mensagem
+function mensagemAleatoria(lista) {
+    return lista[Math.floor(Math.random() * lista.length)];
 }
 
 // calcula o ganhador
@@ -57,10 +78,13 @@ function deselecionar(tipo, escolha) {
     document.getElementById(tipo + '-choice-' + escolha).classList.remove('selecionado');
 }
 
-// 1 - pedra
-// 2 - papel
-// 3 - tesoura
+// jogar rodada
 function jogar(escolha) {
+    if (bloqueado) {
+        return;
+    }
+    bloqueado = true;
+
     escolhaJogador = escolha;
     selecionar('player', escolhaJogador);
 
@@ -68,28 +92,23 @@ function jogar(escolha) {
     jogadaComputador = sorteador(1, 3);
     selecionar('computer', jogadaComputador);
 
-    // ganhador
-    var ganhador = calculaEscolha(escolhaJogador, jogadaComputador);
+    // define ganhador
+    let ganhador = calculaEscolha(escolhaJogador, jogadaComputador);
 
     if (ganhador == 1) {
         somaPontoJogador();
-        var mensagensJogador = ['Aí sim!', 'Boa jogada!', 'Continue assim!', 'É isso aí!', 'Você mandou bem!', 'Essa foi certeira!', 'Jogada de mestre!', 'Imbatível!', 'Você está com sorte!', 'Que reflexo!', 'Ele odeia perder, mas você não liga!', 'Essa foi épica!', 'Eba! Você ganhou!', 'Ele deixou você ganhar... dessa vez.', 'ninguém vence para sempreParabénS!'];
-        mensagem(mensagensJogador[Math.floor(Math.random() * mensagensJogador.length)]);
+        mensagem(mensagemAleatoria(mensagens.jogador));
     } else if (ganhador == 2) {
         somaPontoComputador();
-        var mensagensComputador = ['Ele venceu!', 'Não foi dessa vez!', 'Tente novamente!', 'Ele mandou bem!', 'Derrota amarga!', 'Ele foi mais rápido!', 'Ele está afiado!', 'HA! Ele aprende com seus erros...', 'Você caiu na armadilha!', 'Essa doeu!', 'Ele levou essa!', 'Ele está te estudando...', 'Ele já sabia que você ia jogar isso.', 'HA! Tá ficando previsível!'
-        ];
-        mensagem(mensagensComputador[Math.floor(Math.random() * mensagensComputador.length)]);
+        mensagem(mensagemAleatoria(mensagens.computador));
     } else {
-        var mensagensEmpate = ['Empate!', 'Vocês pensaram igual... legal, né? :)', 'Ninguém venceu dessa vez!', 'Foi por pouco!', 'Empate técnico!', 'Sincronia total! É como se ele estivesse dentro da sua mente!', 'Que coincidência!', 'Empate inesperado!', 'Nada feito!', 'Equilíbrio perfeito!', 'Empate... mas só dessa vez!', 'Vocês pensaram igual. De novo.', 'HA! Tá ficando previsível!'
-        ];
-        mensagem(mensagensEmpate[Math.floor(Math.random() * mensagensEmpate.length)]);
+        mensagem(mensagemAleatoria(mensagens.empate));
     }
 
     setTimeout(() => {
         deselecionar('player', escolhaJogador);
         deselecionar('computer', jogadaComputador);
-        mensagem('Escolha uma opção...');
-    }, 2500);
+        mensagem(msgPadrao);
+        bloqueado = false;
+    }, 1000);
 }
-
